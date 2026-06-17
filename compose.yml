@@ -1,0 +1,16 @@
+services:
+  product-service:
+    build: ./products
+    container_name: product-service
+    ports:
+      - "8081:8081"
+
+  gateway-service:
+    build: ./gateway
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - product-service
+
+

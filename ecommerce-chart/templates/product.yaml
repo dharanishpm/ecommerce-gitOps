@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+  labels:
+    app: ecommerce
+spec:
+  replicas: {{ .Values.product.replicaCount }}
+  selector:
+    matchLabels:
+      name: product-service
+      app: ecommerce
+  template:
+    metadata:
+      name: product-service
+      labels:
+        name: product-service
+        app: ecommerce
+    spec:
+      containers:
+        - name: product-service
+          image: "{{ .Values.product.image.repository }}:{{ .Values.product.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: product-service
+              containerPort: {{.Values.product.service.port}}
+
+
+

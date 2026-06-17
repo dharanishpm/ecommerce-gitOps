@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gateway-service
+  labels:
+    name: gateway-service
+    app: ecommerce
+spec:
+  containers:
+    - name: gateway-service
+      image: nginx
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: gateway-service
+          containerPort: 80
+  restartPolicy: Always
+  

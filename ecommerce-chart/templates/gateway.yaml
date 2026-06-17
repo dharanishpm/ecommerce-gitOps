@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-service
+  labels:
+    app: ecommerce
+spec:
+  replicas: {{ .Values.gateway.replicaCount }}
+  selector:
+    matchLabels:
+      name: gateway-service
+      app: ecommerce
+  template:
+    metadata:
+      name: gateway-service
+      labels:
+        name: gateway-service
+        app: ecommerce
+    spec:
+      containers:
+        - name: gateway-service
+          image: "{{ .Values.gateway.image.repository }}:{{ .Values.gateway.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: gateway-service
+              containerPort: {{.Values.gateway.service.port}}
+          env:
+            - name: PRODUCT_SERVICE_URL
+              value: "{{ .Values.gateway.env.productServiceUrl }}"
+            - name: SERVER_PORT
+              value: "{{.Values.gateway.service.port}}"
+
+
+

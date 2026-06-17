@@ -1,0 +1,18 @@
+gateway:
+  replicaCount: 2
+  image:
+    repository: docker.io/library/ecommerce-gateway-service
+    tag: latest
+  service:
+    port: 8080
+    nodePort: 30080
+  env:
+    productServiceUrl: "http://product-service:8081"
+
+product:
+  replicaCount: 2
+  image:
+    repository: docker.io/library/ecommerce-product-service
+    tag: latest
+  service:
+    port: 8081
