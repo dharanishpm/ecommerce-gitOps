@@ -32,22 +32,19 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Set Short SHA
-        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
-
       - name: Build Docker Image
         run: |
           docker build \
-            -t $ECR_REPOSITORY:$SHORT_SHA \
+            -t $ECR_REPOSITORY:${{ github.sha }} \
             ./gateway
 
       - name: Tag Docker Image
         run: |
           docker tag \
-            $ECR_REPOSITORY:$SHORT_SHA \
-            394422659307.dkr.ecr.eu-west-1.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
+            $ECR_REPOSITORY:${{ github.sha }}  \
+            394422659307.dkr.ecr.eu-west-1.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }} 
 
       - name: Push Docker Image
         run: |
           docker push \
-            394422659307.dkr.ecr.eu-west-1.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
+            394422659307.dkr.ecr.eu-west-1.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
