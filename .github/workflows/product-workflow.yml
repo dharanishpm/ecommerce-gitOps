@@ -1,0 +1,50 @@
+name: Build Product Service
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'product/**'
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: eu-west-1
+  ECR_REPOSITORY: product-service
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::394422659307:role/gitPushECR
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build \
+            -t $ECR_REPOSITORY:$SHORT_SHA \
+            ./product
+
+      - name: Tag Docker Image
+        run: |
+          docker tag \
+            $ECR_REPOSITORY:$SHORT_SHA \
+            394422659307.dkr.ecr.eu-west-1.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
+
+      - name: Push Docker Image
+        run: |
+          docker push \
+            394422659307.dkr.ecr.eu-west-1.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
