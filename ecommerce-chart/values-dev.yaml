@@ -16,3 +16,6 @@ product:
     tag: latest
   service:
     port: 8081
+
+ingress:
+  enabled: true

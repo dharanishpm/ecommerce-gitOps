@@ -11,5 +11,5 @@ spec:
       port: 80
       targetPort: {{.Values.gateway.service.port}}
       nodePort: {{.Values.gateway.service.nodePort}}
-  type: NodePort
+  type: ClusterIP
   
