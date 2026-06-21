@@ -20,5 +20,4 @@ public class Products {
         return List.of(product1, product2);
     }
 
-
 }
