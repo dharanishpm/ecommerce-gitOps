@@ -54,7 +54,7 @@ jobs:
 
       - name: Verify JAR
         run: |
-          ls -la gateway/target
+          ls -la products/target
 
       - name: Build Docker Image
         run: |
