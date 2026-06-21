@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'product/**'
+      - 'products/**'
 
 permissions:
   id-token: write
