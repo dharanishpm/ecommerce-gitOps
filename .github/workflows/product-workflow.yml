@@ -51,7 +51,7 @@ jobs:
         run: |
           docker build \
             -t $ECR_REPOSITORY:${{ github.sha }} \
-            ./product
+            ./products
 
       - name: Tag Docker Image
         run: |
