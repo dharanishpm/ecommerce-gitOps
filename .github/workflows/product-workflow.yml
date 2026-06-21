@@ -13,7 +13,7 @@ permissions:
 
 env:
   AWS_REGION: eu-west-1
-  ECR_REPOSITORY: product-service
+  ECR_REPOSITORY: ecommerce/product-service
 
 jobs:
   build-and-push:
