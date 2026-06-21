@@ -38,9 +38,18 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Build Product Application
+        run: |
+          cd products
+          mvn clean package -DskipTests
+
+      - name: Verify JAR
+        run: |
+          ls -la products/target
+
       - name: Build Gateway Application
         run: |
-          cd gateway
+          cd products
           mvn clean package -DskipTests
 
       - name: Verify JAR
