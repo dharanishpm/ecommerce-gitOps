@@ -1,5 +1,5 @@
 gateway:
-  replicaCount: 1
+  replicaCount: 2
   image:
     repository: 394422659307.dkr.ecr.eu-west-1.amazonaws.com/ecommerce/gateway-service
     tag: 1ed62b0b73231484b4f5ba03459d654b203275a2
@@ -10,7 +10,7 @@ gateway:
     productServiceUrl: "http://product-service:8081"
 
 product:
-  replicaCount: 1
+  replicaCount: 2
   image:
     repository: 394422659307.dkr.ecr.eu-west-1.amazonaws.com/ecommerce/product-service
     tag: fbb9987f0275f8cb263c849a1a24ff00dc48f250
