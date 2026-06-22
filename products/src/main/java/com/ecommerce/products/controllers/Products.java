@@ -19,8 +19,4 @@ public class Products {
         ProductResponse product2 = ProductResponse.builder().productId("2").productName("Product 2").price(24.00).stockQuantity(100).build();
         return List.of(product1, product2);
     }
-
-
-
-
 }
